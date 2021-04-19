@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation - 事件</title>
+    <style type="text/css">
+        @keyframes colorchange {
+            0%{background-color: yellow;}
+            50% { background-color: blue; }
+            100% { background-color: red; }
+        }
+
+        #myelement {
+            width:100px;
+            height:100px;
+            background-color:#fff;
+            animation: colorchange 5s linear 1s 2 normal; 
+        }
+    </style>
+</head>
+<body>
+    <div id="myelement"></div>
+
+    <script type="text/javascript">
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        
+        var ele = $('myelement');
+
+        ele.addEventListener('animationstart', function(e) {
+            console.log(e.animationName)
+            console.log('animationstart')
+        })
+
+        ele.addEventListener('animationend', function(e) {
+            console.log(e.animationName)
+            console.log('animationend')
+        })
+
+        ele.addEventListener('animationiteration', function(e) {
+            console.log(e.animationName)
+            console.log('animationiteration')
+        })
+    </script>
+</body>
+</html>

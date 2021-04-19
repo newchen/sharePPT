@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  margin: 50px auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 600px;
+}
+
+.wrap {
+  margin-bottom: 20px;
+}
+.wrap h1 {
+  font-size: 20px;
+}
+.wrap .box {
+  margin-top: 10px;
+}
+.box > span {
+  margin-right: 20px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  cursor: pointer;
+  padding: 3px 8px;
+  color: #ccc;
+}
+.box .option {
+  color: black;
+  border-color: black;
+}
+.box .option.active {
+  background-color: #006a4f;
+  border-color: #006a4f;
+  color: #fff;
+}

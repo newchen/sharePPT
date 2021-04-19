@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transitionend-1</title>
+    <style type="text/css">
+        p#animate {
+            width: 100px;
+            height:100px;
+            background-color: #F00;
+            transition: 3s;
+        }
+        p#animate:hover {
+            width: 200px;
+            height:200px;
+            /* transition: 3s; */
+        }
+    </style>
+</head>
+<body>
+    <p id="animate"></p>
+
+    <script type="text/javascript">
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        
+        $('animate').addEventListener('transitionend', function(e) {
+            // alert('结束');
+            console.log(e.propertyName);
+        });
+    </script>
+</body>
+</html>

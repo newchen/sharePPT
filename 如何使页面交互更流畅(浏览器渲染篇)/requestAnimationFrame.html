@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>requestAnimationFrame</title>
+  <style>
+    #div {
+      position: absolute;
+      left: 10px;
+      width: 110px;
+      height: 100px;
+      top: 300px;
+      background: red;
+      font-size: 12px;
+    }
+    .btns {
+      position: absolute;
+      top: 450px;
+    }
+  </style>
+</head>
+<body>
+  <div id="div">打开FPS, 查看帧率</div>
+
+  <div class="btns">
+    <button id="btn1">按钮1: 帧率较高</button>
+    <button id="btn2">按钮2: 降低了频率</button>
+    <button id="btn3">重置 </button>
+  </div>
+
+  <script>
+    const div = document.querySelector("#div");
+    const btn1 = document.querySelector("#btn1");
+    const btn2 = document.querySelector("#btn2");
+    const btn3 = document.querySelector("#btn3");
+    let delay = 0;
+
+    function wait(delay) {
+      const end = performance.now() + Number(delay);
+      while (performance.now() <= end) {}
+    }
+
+    function run() {
+      let left = parseInt(getComputedStyle(div).left, 10)
+      if (left > 1000) return;
+
+      wait(delay) // 假设这是业务逻辑执行时间
+
+      div.style.left = left + 1 + 'px'
+      requestAnimationFrame(run)
+    }
+
+    // 基本上都是50fps左右
+    btn1.onclick = function() {
+      delay = 0
+      run()
+    }
+
+    // 基本上不满30fps
+    btn2.onclick = function() {
+      delay = 20 // 延迟20毫秒
+      run() 
+    }
+
+    btn3.onclick = function() {
+      delay = 0
+      div.style.left = '10px'
+    }
+  </script>
+</body>
+</html>

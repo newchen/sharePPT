@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>translate</title>
+    <style type="text/css">
+        body{
+            width:800px;
+            height:500px;
+            border:1px solid #ccc;
+        }
+        .trans{
+            width:100px;
+            height:100px;
+            background:green;
+            transition:2s; 
+            margin:100px auto;
+        }
+        body:hover .trans{ 
+            /* transform:scale(2);  */
+            /* transform:scale(2,2);  */
+            /* transform:scale(-1.5);  */
+            transform:scale(-1.5, 1);   
+        }
+    </style>
+</head>
+<body>
+    <div class="trans">123</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    div {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    @keyframes an-1 {
+      0% {left: 10px;}
+      50% { left: 200px; }
+      100% { left: 500px; }
+    }
+    @keyframes an-2 {
+      0% {top: 10px;}
+      50% { top: 200px; }
+      100% { top: 500px; }
+    }
+    /* .an1 {
+      animation: an-1 2s linear;
+    }
+    .an2 {
+      animation: an-2 2s linear 10s;
+    } */
+</style>
+</head>
+<body>
+  <div>我是内容</div>
+  <input value="开始" type="button" style="margin-top:100px;" />
+
+  <script>
+    var div = document.querySelector("div");
+
+    document.querySelector("input").onclick=function() {
+      switch(this.value){
+        case "开始":
+          // div.classList.add('an1')
+          div.style.animationDelay = '0s';
+          div.style.animation = 'an-1 2s linear'
+          this.value = "暂停";
+          break;
+        case "暂停":
+          // div.classList.add('an2')
+          div.style.animationDelay = '10s';
+          // div.style.animationName = 'an-2'
+          // div.style.animation = 'an-2 2s linear 10s'
+          this.value = "开始";
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
+
+结论: 可以看到animation设置delay后, 会立马回到原位, 无法模拟暂停

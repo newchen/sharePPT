@@ -1,0 +1,24 @@
+﻿
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步队列</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function wait(s) {
+            var start = +new Date();
+            while (start + s * 1000 > (+new Date())) {}
+        } 
+
+        document.body.addEventListener("click", function () {
+            wait(10);
+        }, false);
+
+        setTimeout(function () {
+            console.log("Done!");
+        }, 1000 * 3);
+    </script>
+</body>
+</html>

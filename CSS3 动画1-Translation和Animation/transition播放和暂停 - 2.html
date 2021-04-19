@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>transition播放和暂停 - 2</title>
+        <style type="text/css">
+            .box{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                margin: 50px;
+            }
+            .box.horizTranslate {
+                transition: 3s;
+                margin-left: 100% !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+        <button class="toggleButton">开始</button>
+
+    <script type="text/javascript">
+        var box = document.querySelector('.box');
+
+        document.querySelector('.toggleButton').onclick = function () {
+            if (this.innerHTML === '开始') {
+                this.innerHTML = '暂停';
+                box.classList.add('horizTranslate');
+            } else {
+                this.innerHTML = '开始';
+                var computedStyle = window.getComputedStyle(box), 
+                    marginLeft = computedStyle.getPropertyValue('margin-left');
+
+                box.style.marginLeft = marginLeft;
+                box.classList.remove('horizTranslate');
+            }
+        };
+
+        /*// jquery的写法
+        $('.toggleButton:eq(1)').on('click', function () {
+            if ($(this).html() === '开始') {
+                $(this).html('暂停');
+                $boxTwo.addClass('horizTranslate');
+            } else {
+                $(this).html('开始');
+                var computedStyle = $boxTwo.css('margin-left');
+                $boxTwo.removeClass('horizTranslate');
+                $boxTwo.css('margin-left', computedStyle);
+            }
+        })*/
+    </script>
+    </body>
+    </html>  

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>position-fixed</title>
+    <style type="text/css">
+        .content{
+            height:2000px;
+        }
+
+        .fixed{
+            position: fixed;
+            bottom:100px;
+            right:30px;
+            width: 100px;
+            height:200px;
+            line-height: 200px;
+            background-color:#ccc;
+            /*这里为什么加下面的呢？*/
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="content">
+        <span class="fixed">我固定</span>
+    </div>
+
+</body>
+</html>

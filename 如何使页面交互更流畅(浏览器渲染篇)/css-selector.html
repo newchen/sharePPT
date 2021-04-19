@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+  ul{list-style-type: none;}
+  .box-container .box {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    margin: 5px;
+    text-align:center;
+    line-height:40px;
+  }
+  .print {
+    color:#b269bd;
+    display:flex;
+    padding: 20px;
+    background: #fff6de;
+  }
+  .print li {
+    width:30%;
+    text-align:center;
+    font-size:20px;
+  }
+  .print p {
+    padding:0 10px;
+    word-break: break-all;
+  }
+  .print span {
+    display:inline-block;
+    width:100px;
+    height:100px;
+    box-shadow:0 0 10px #b269bd;
+    border-radius:50%;
+    text-align:center;
+    line-height:100px;
+    font-size:30px;
+  }
+  </style>
+</head>
+<body>
+<button>点击我</button>
+<div class="print">
+  <ul class="print">
+    <li><span>?? ms</span><p>div.box:not(:empty):last-of-type</p></li>
+    <li><span>?? ms</span><p>.box--last</p></li>
+    <li><span>?? ms</span><p>.box:nth-last-child(-n+1)</p></li>
+  </ul>
+</div>
+<div class="box-container"></div>
+
+<script>
+  const container = document.querySelector('.box-container');
+  const button = document.querySelector('button');
+  const count = 10000;
+
+  for (let i = 0; i < count; i++) {
+    const div = document.createElement('div');
+    div.classList.add('box');
+    div.innerHTML = `<span>${i + 1}</span>`;
+    if (i === count - 1) div.classList.add('box--last'); // 最后一个添加 box--last 类
+    container.appendChild(div);
+  }
+
+  button.addEventListener('click', function() {
+    const selectors = [
+      "div.box:not(:empty):last-of-type",
+      ".box--last",
+      ".box:nth-last-child(-n+1)"
+    ];
+
+    selectors.forEach(function(s, i) {
+      const start = performance.now();
+      const d = document.querySelector(s);
+      const end = performance.now();
+      const duration = (end - start).toFixed(2);
+      document.querySelectorAll('.print li span')[i].innerHTML = `${duration}`;
+    });
+  });
+</script>
+</body>
+</html>

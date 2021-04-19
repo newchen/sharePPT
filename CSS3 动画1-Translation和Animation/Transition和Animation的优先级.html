@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transition和Animation的优先级</title>
+    <style type="text/css">
+        .box{
+            width:100px;
+            height:100px;
+            border: 1px solid red;
+        }
+
+        @keyframes ani {
+            0% { width: 100px; }
+            50%{ width: 300px; }
+            100%{ width: 600px;}
+        }
+        
+        .box-ani{
+            /* width: 400px;
+            transition: width 5s linear;   */
+
+            animation: ani 2s linear;
+
+            width: 400px;
+            transition: width 5s linear ;  
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="box" id="box"></div>
+    <div style="border: 1px solid blue;width: 400px">我是400px</div>
+
+    <script>
+        document.querySelector("#box").onclick = function () {
+            this.classList.add('box-ani')
+        }
+    </script>
+</body>
+</html>

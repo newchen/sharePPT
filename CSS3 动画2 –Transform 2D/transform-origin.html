@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>translate-origin</title>
+    <style type="text/css">
+        body{
+            width:800px;
+            height:500px;
+            border:1px solid #ccc;
+        }
+        .trans-origin{
+            width:100px; 
+            height:100px;
+            background:green;
+            transition:2s;
+            transform: scale(0,0); 
+            /* transform-origin:0 0;  */
+        }
+        body:hover .trans-origin{
+            transform:scale(1,1);
+            /* transform-origin: 0 0;*/ /* 效果又如何呢？*/
+        }
+    </style>
+</head>
+<body>
+    <div class="trans-origin"></div>
+</body>
+</html>

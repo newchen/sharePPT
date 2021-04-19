@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #book {
+            width:200px;
+            height: 200px;
+            margin:200px auto;
+            background-color: red;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="jquery.easing.min.js"></script>
+</head>
+<body>
+    <div id="book"></div>
+
+    <script type="text/javascript">
+        $( "#book" ).on('click', function() {
+            $(this).animate({
+                width: "400px",
+                height: "400px"
+            }, {
+                duration: 5000,
+                easing: 'linear',
+                // specialEasing: {
+                //   width: "linear",
+                //   height: "easeOutBounce"
+                // },
+                complete: function() {
+                    console.log( "<div>Animation complete.</div>" );
+                }
+            });
+        });
+    </script>
+</body>
+</html>

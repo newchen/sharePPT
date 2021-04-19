@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>触发paint</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+
+        body{
+            background:url(1.jpg) no-repeat;
+            background-size:100% 100%;
+        }
+        .checkbox-parent{
+            margin:50px 100px;
+        }
+        .checkbox-parent label{
+            margin-right:50px;
+            color:white;
+        }
+
+        .wrapper{
+            margin-left:200px;
+        }
+        .js-paint{
+            width:400px;
+            /* height:500px; */
+            background:#ccc;
+            text-align:center;
+            display:inline-block;
+            line-height:200px;
+            margin-right:50px;
+            margin-bottom:50px;
+        }
+
+        .attach{background-attachment:fixed;}
+        .radius{border-radius:40px;}
+        .b-shadow{box-shadow:10px 10px 5px red;}
+        .t-shadow{text-shadow:10px 10px 5px red;}
+    </style>
+</head>
+<body>
+    <div class="checkbox-parent">
+        <label><input type="checkbox" data-cls="attach">background-attachment</label>
+        <label><input type="checkbox" data-cls="radius">border-radius</label>
+        <label><input type="checkbox" data-cls="b-shadow">box-shadow</label>
+        <label><input type="checkbox" data-cls="t-shadow">text-shadow</label>
+    </div>
+    <div class="wrapper">
+        <div class="js-paint">触发paint -- 1</div>
+        <div class="js-paint">触发paint -- 2</div>
+        <div class="js-paint">触发paint -- 3</div>
+        <div class="js-paint">触发paint -- 4</div>
+        <div class="js-paint">触发paint -- 5</div>
+        <div class="js-paint">触发paint -- 6</div>
+        <div class="js-paint">触发paint -- 7</div>
+        <div class="js-paint">触发paint -- 8</div>
+    </div>
+    
+
+    <script type="text/javascript">
+        var checkboxParent = document.querySelector('.checkbox-parent');
+        var paints = document.querySelectorAll('.js-paint')
+
+        checkboxParent.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            var target = e.target;
+            var elName = target.nodeName.toLowerCase();
+
+            var checked = false, cls = '';
+
+            if(elName == 'label') {
+                target = target.querySelector('input')
+                checked = !target.checked;
+                cls = target.getAttribute('data-cls');
+
+                if(cls == 'attach') {
+                    checked ? document.body.classList.add(cls) :
+                        document.body.classList.remove(cls) 
+                } else {
+                    [].forEach.call(paints, function(v) {
+                        checked ? 
+                            v.classList.add(cls) :
+                            v.classList.remove(cls)
+                    })
+                }
+
+                target.checked = checked;
+            }
+        }, false)
+    </script>
+</body>
+</html>

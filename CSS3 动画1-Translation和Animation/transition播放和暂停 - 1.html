@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transition播放和暂停 - 1</title>
+    <style type="text/css">
+        div {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>我是内容</div>
+    <input value="开始" id="play" type="button" style="margin-top:100px;" />
+
+    <div style="font-size: 20px; margin-top:150px;width: 500px;color: #777474;">
+    transition有个特性，它在播放过程中如果给元素的相关属性设置了其它值，那么它也是从当前播放位置开始过度到新的值而不是重新计算。
+    <br/>另外transition的参数列表中有个delay参数，设置它可以使动画延迟一段时间后再开始。把这两个东西结合起来就可以实现暂停了。
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            var div = document.querySelector("div").style;
+
+            document.querySelector("input").onclick=function(){
+                switch(this.value){
+                    case "开始":
+                        div.left = "500px";
+                        div.transition = "left 10s linear";
+                        this.value = "暂停";
+                        break;
+                    case "暂停":
+                        div.transitionDelay = "99999s"; //后面的动画会暂停这么多秒
+                        div.left = "-9px"; //这个动画会暂停前面设置的秒数
+                        this.value = "开始";
+                        break;
+                }
+            }
+          };
+    </script>
+</body>
+</html>

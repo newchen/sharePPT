@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>skew2</title>
+    <style type="text/css">
+        body {
+            width:800px;
+            height:500px;
+            border:1px solid #ccc;
+        }
+        /*设置原始元素样式*/
+        #origin {
+            width:200px;
+            height:100px;
+            border:1px dashed gray;
+            margin:100px auto;
+        }
+        /*设置当前元素样式*/
+        #current {
+            width:200px;
+            height:100px;
+            color:white;
+            background-color: lightskyblue;
+            /* transform:skewX(30deg); */
+            /* transform:skewY(30deg); */
+            transform:skew(30deg, 10deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="origin">
+        <div id="current"></div>
+    </div>
+</body>
+</html>

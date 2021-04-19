@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>requestAnimationFrame动画</title>
+    <style type="text/css">
+        .interval{
+            width:100px;
+            height:100px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="interval" id="div"></div>
+
+    <script type="text/javascript">
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+
+        // 兼容
+        var requestAnimationFrame = window.requestAnimationFrame || //未来标准
+            window.mozRequestAnimationFrame || //FF
+            window.webkitRequestAnimationFrame || //Chrome
+            window.msRequestAnimationFrame, //IE
+
+            startTime = window.mozAnimationStartTime || Date.now();
+        
+        $('div').onclick = function() {
+            var self = this,
+                width = this.offsetWidth;
+
+            requestAnimationFrame(function(timestamp){
+                //计算两次重绘的时间间隔
+                var drawStart = (timestamp || Date.now()),
+                diff = drawStart - startTime;
+
+                //具体操作
+                console.log(diff);
+                width++;
+                self.style.width = width + 'px';
+
+                //把startTime 重写为这一次的绘制时间
+                startTime = drawStart;
+                //重绘UI
+                width < 300 && requestAnimationFrame(arguments.callee);
+            });
+        }
+    </script>
+</body>
+</html>

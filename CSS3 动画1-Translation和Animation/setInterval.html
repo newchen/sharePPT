@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterval动画</title>
+    <style type="text/css">
+        .interval{
+            width:100px;
+            height:100px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="interval" id="div"></div>
+
+    <script type="text/javascript">
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        
+        $('div').onclick = function() {
+            var interval = null, self = this,
+                width = this.offsetWidth;
+
+            interval = setInterval(function() {
+                if(width >= 300) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    self.style.width = width + 'px';
+                }
+            }, 16.7);
+        }
+    </script>
+</body>
+</html>

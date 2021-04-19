@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>matrix-skew</title>
+    <style type="text/css">
+        .matrix_box {
+            width: 150px;
+            height: 150px;
+            background-color: #a0b3d6;
+            -moz-transform-origin: top left;
+            -webkit-transform-origin: top left;
+            -o-transform-origin: top left;
+            transform-origin: top left;
+            transition:2s;
+        }
+    </style>
+</head>
+<body>
+    <p id="matrixDetail">目前属性值为：matrix(1,0,0,1,0,0)</p>
+    <p>x轴倾斜角度(0-89)：<input type="range" id="matrixSkewX" value="0" min="0" max="89" autocomplete="off" /></p>
+    <p>y轴倾斜角度(0-89)：<input type="range" id="matrixSkewY" value="0" min="0" max="89" autocomplete="off" /></p>
+    <div id="matrixBox" class="matrix_box"></div>
+
+    <script type="text/javascript">
+        (function() {
+            var $ = function(selector) {
+              return document.querySelector(selector);
+            };
+
+            var $css3Transform = function(element, value) {
+                var arrPriex = ["O", "Ms", "Moz", "Webkit", ""], length = arrPriex.length;
+                for (var i=0; i < length; i+=1) {  element.style[arrPriex[i] + "Transform"] = value;  }
+            };
+
+            var eleRangeX = $("#matrixSkewX"), eleRangeY = $("#matrixSkewY"),
+                eleDetail = $("#matrixDetail"), eleBox = $("#matrixBox");
+            
+            if (eleDetail && eleRangeX && eleRangeY && eleBox) {
+                var arrRange = [eleRangeX, eleRangeY];
+                for (var start=0; start<2; start+=1) {
+                    arrRange[start].addEventListener("change", function() {
+                        var maxVal = this.getAttribute("max"), minVal = this.getAttribute("min"), value = this.value;
+                        if (value - minVal < 0) {
+                            value = minVal;
+                            this.value = minVal;
+                        }
+                        if (value - maxVal > 0) {
+                            value = maxVal;
+                            this.value = maxVal;
+                        }
+                        var tanValY = Math.tan(eleRangeY.value * Math.PI / 180), tanValX = Math.tan(eleRangeX.value * Math.PI / 180);
+                        var valTransform = 'matrix(1,'+ tanValY.toFixed(6) +','+ tanValX.toFixed(6) +',1,0,0)';
+                        eleDetail.innerHTML = '目前属性值为：' + valTransform;
+                        $css3Transform(eleBox, valTransform);
+                    });    
+                }     
+            }      
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation-fill-mode</title>
+    <style type="text/css">
+        @keyframes colorchange {
+            0%{background-color: yellow;}
+            50% { background-color: blue; }
+            100% { background-color: red; }
+        }
+
+        .div {
+            width:100px;
+            height:100px;
+            background-color: black;
+            animation: colorchange 5s linear 1s 1 normal;
+
+            animation-fill-mode: forwards;
+            animation-fill-mode: backwards; 
+            animation-fill-mode: both; 
+        }
+    </style>
+</head>
+<body>
+    <div class="div" id="div"></div>
+</body>
+</html>

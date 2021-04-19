@@ -1,0 +1,43 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>为什么使用硬件加速实现动画会快</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        div{width:150px;height:100px;font-family: '微软雅黑';text-align: center;line-height: 100px;}
+
+        .left{background-color: red;top:100px; position: absolute;left:40px;transition: left 1s linear;}
+        .left-ani{left:740px;}
+
+        .transf{background-color: orange;transform: translateX(40px); transition: transform 1s linear;}
+        .transf-ani{transform: translateX(740px);}
+
+        button{padding:10px;}
+        .btn1{margin:220px 0 100px 40px;}
+        .btn2{margin-left:40px;margin-top:20px;}
+    </style>
+</head>
+<body>
+    <div class="left" id="left">left动画</div>
+    <button class="btn1" id="btn1">left动画</button>
+
+    <div class="transf" id="transf">translateX动画</div>
+    <button class="btn2" id="btn2">translateX动画</button>
+
+    <script type="text/javascript">
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        
+        $('btn1').onclick = function() {
+            $('left').classList.toggle('left-ani')
+        }
+
+        $('btn2').onclick = function() {
+            $('transf').classList.toggle('transf-ani')
+        }
+    </script>
+</body>
+</html>

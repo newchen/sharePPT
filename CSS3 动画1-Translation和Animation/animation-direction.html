@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation-direction</title>
+    <style type="text/css">
+        @keyframes colorchange {
+            50% { background-color: blue; }
+            100% { background-color: red; }
+        }
+
+        #myelement {
+            width:100px;
+            height:100px;
+            background-color:#fff;
+            /* animation: colorchange 5s linear 1s infinite normal;  */
+
+            animation: colorchange 5s linear 1s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <div id="myelement"></div>
+</body>
+</html>

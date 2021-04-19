@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transitionend-2</title>
+    <style type="text/css">
+        p#animate {
+            width: 100px;
+            height:100px;
+            background-color: #F00;
+            transition: 3s;
+        }
+    </style>
+</head>
+<body>
+    <p id="animate"></p>
+
+    <script type="text/javascript">
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        
+        $('animate').onclick = function() {
+            this.style.width = this.offsetWidth + 100 + 'px';
+
+            this.addEventListener('transitionend', function(e) {
+                console.log('transitionend');
+                this.style.width = this.offsetWidth + 100 + 'px';
+            });
+
+        }
+    </script>
+</body>
+</html>
