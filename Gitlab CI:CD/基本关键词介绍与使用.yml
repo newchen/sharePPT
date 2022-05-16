@@ -1,0 +1,106 @@
+# -------------步骤1: stages, stage, script关键字------------------------
+
+stages:
+  - install 
+  - build
+  - deploy
+
+job_install:
+  stage: install
+  script:
+    - yarn
+
+job_build:
+  stage: build
+  script:
+    - yarn run build
+
+job_deploy:
+  stage: deploy
+  script:
+    - echo 'start deploy'
+
+
+# -----------------步骤2: image关键字--------------------
+image: node:alpine  # 使用node镜像
+
+stages:
+  - install 
+  - build
+  - deploy
+
+job_install:
+  stage: install
+  script:
+    - yarn
+
+job_build:
+  stage: build
+  script:
+    - yarn run build
+
+job_deploy:
+  stage: deploy
+  script:
+    - echo 'start deploy'
+
+# -----------------步骤3: cache关键字--------------------
+image: node:alpine  # 使用node镜像
+
+stages:
+  - install 
+  - build
+  - deploy
+
+cache:
+  key: hello-cache # 唯一标识
+  paths: # 要缓存的, 这里缓存了node_modules目录
+    - node_modules
+
+job_install:
+  stage: install
+  script:
+    - yarn
+
+job_build:
+  stage: build
+  script:
+    - yarn run build
+
+job_deploy:
+  stage: deploy
+  script:
+    - echo 'start deploy'
+
+# -----------------步骤4: only和when关键字--------------------
+image: node:alpine 
+
+stages:
+  - install 
+  - build
+  - deploy
+
+cache:
+  key: hello-cache 
+  paths:
+    - node_modules
+
+job_install:
+  stage: install
+  script:
+    - yarn
+  only:
+    - master  # master分支
+
+job_build:
+  stage: build
+  script:
+    - yarn run build
+  only:
+    - master  # master分支
+
+job_deploy:
+  stage: deploy
+  script:
+    - echo 'start deploy'
+  when: manual   # 手动

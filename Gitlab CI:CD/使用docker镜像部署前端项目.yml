@@ -1,0 +1,59 @@
+image: node:alpine # 基础镜像
+
+variables: # 变量
+  IMG_NAME: test_image
+  CONTAINER_NAME: test
+
+stages:  # 定义阶段
+  - install
+  - build
+  - deploy
+
+cache: # 缓存
+  key:
+    files: # 下面文件变化时, 才会重新生成缓存
+      - yarn.lock
+      - package.json
+  paths: # 当前工作环境下要缓存的目录
+    - node_modules
+
+job_install: # 一个job
+  stage: install
+  tags:  # 指定使用哪个runner
+    - cicd1
+  script:  # 执行的脚本
+    - yarn
+  interruptible: true # 允许被新的流水线打断
+  only:  # 只有满足下面的策略条件才会执行该job
+    changes:
+      - yarn.lock
+      - package.json
+
+job_build:
+  stage: build
+  cache:
+    policy: pull # 只拉取, 不上传
+    paths:
+      - node_modules
+  tags:
+    - cicd1
+  script:
+    - yarn run docs:build
+  artifacts:  # 保留文档
+    paths:
+      - docs-dist/
+  interruptible: true
+
+job_deploy:
+  stage: deploy
+  cache: {} # 禁用缓存
+  tags:
+    - cicd1
+  image: docker  # 因为下面script中的docker命令是在容器里面运行的, ps: 其实所有任务都是运行在容器中的
+  script:
+    # build命令构建生成image镜像, -t指定名称, .表示Dockerfile文件路径(ps: 准确的说这表示上下文目录)
+    - docker build -t $IMG_NAME .
+    # 如果已经存在该容器, 删除
+    - if [ $(docker ps -aq --filter name=$CONTAINER_NAME) ]; then docker rm -f $CONTAINER_NAME; fi
+    # 生成并启动容器
+    - docker run -d -p 8082:80 --name $CONTAINER_NAME $IMG_NAME
